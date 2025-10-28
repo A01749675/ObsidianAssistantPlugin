@@ -6,3 +6,267 @@ available in the app when your plugin is enabled.
 If your plugin does not need CSS, delete this file.
 
 */
+/* === AiResponse Component === */
+.airesponse-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 16px;
+  font-family: var(--font-interface);
+  color: var(--text-normal);
+  animation: fadeIn 0.3s ease;
+}
+
+/* === Input + Button Row === */
+.airesponse-input-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  width: 100%;
+  flex-wrap: wrap; /* allows wrapping when the window is narrow */
+}
+
+/* Input wrapper */
+.airesponse-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 200px;
+}
+
+/* Input label */
+.airesponse-label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+  color: var(--text-muted);
+}
+
+/* Input field styling */
+.airesponse-input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 6px;
+  background-color: var(--background-primary);
+  color: var(--text-normal);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.airesponse-input:focus {
+  border-color: var(--interactive-accent);
+  box-shadow: 0 0 0 2px var(--background-modifier-form-field-highlight);
+}
+
+/* Button styling */
+.airesponse-button {
+  /* background-color: var(--interactive-accent); */
+  background-color: green;
+  color: var(--text-on-accent);
+  font-weight: 600;
+  padding: 10px 16px;
+  margin-top: 27px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  white-space: nowrap;
+}
+
+.airesponse-button:hover:not(:disabled) {
+  background-color: var(--interactive-accent-hover);
+  transform: translateY(-1px);
+}
+
+.airesponse-button:disabled {
+  background-color: var(--background-modifier-border);
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+/* === Response Output Box === */
+.airesponse-output {
+  background: var(--background-secondary);
+  border-left: 4px solid var(--interactive-accent);
+  padding: 12px 16px;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px var(--background-modifier-box-shadow);
+}
+
+.airesponse-output strong {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--text-accent);
+}
+
+.airesponse-output p {
+  margin: 0;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  font-size: 0.95rem;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive stacking for small panels */
+@media (max-width: 500px) {
+  .airesponse-input-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .airesponse-button {
+    width: 100%;
+  }
+}
+
+.container{
+    border: 3px white solid;
+    border-radius: 0.5rem;
+}
+.close{
+    margin-left:15px;
+}
+/* users */
+/* === Chat History Container === */
+/* === Chat History Container === */
+.chat-history {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 10px;
+  height: 320px;
+  overflow-y: auto;
+  background-color: var(--background-primary);
+  border-radius: 8px;
+  border: 1px solid var(--background-modifier-border);
+  scroll-behavior: smooth;
+}
+
+/* Empty message text */
+.chat-empty {
+  text-align: center;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-top: 1rem;
+}
+
+/* === Chat Messages === */
+.chat-message {
+  display: flex;
+  margin: 4px 0;
+  animation: fadeInMessage 0.25s ease;
+}
+
+/* User messages (right side) */
+.chat-message.user {
+  justify-content: flex-end;
+}
+
+.chat-message.user .chat-bubble {
+  background-color: var(--interactive-accent);
+  color: var(--text-on-accent);
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 12px;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+/* Assistant messages (left side) */
+.chat-message.assistant,
+.chat-message.ai {
+  justify-content: flex-start;
+}
+
+.chat-message.assistant .chat-bubble,
+.chat-message.ai .chat-bubble {
+  background-color: var(--background-secondary);
+  color: var(--text-normal);
+  border: 1px solid var(--background-modifier-border);
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+/* === Chat Bubbles === */
+.chat-bubble {
+  max-width: 75%;
+  padding: 10px 14px;
+  line-height: 1.45;
+  font-size: 0.95rem;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  box-shadow: 0 1px 3px var(--background-modifier-box-shadow);
+}
+
+/* Scrollbar styling (dark/light friendly) */
+.chat-history::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-history::-webkit-scrollbar-thumb {
+  background-color: var(--background-modifier-border);
+  border-radius: 4px;
+}
+
+.chat-history::-webkit-scrollbar-thumb:hover {
+  background-color: var(--background-modifier-active-hover);
+}
+
+/* Subtle fade-in animation */
+@keyframes fadeInMessage {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.copy-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  padding: 4px;
+  transition: color 0.2s ease;
+}
+
+.copy-button:hover {
+  color: var(--interactive-accent);
+}
+
+.chat-message {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  position: relative;
+}
+
+.chat-bubble {
+  flex-grow: 1;
+  background: var(--background-secondary);
+  padding: 10px;
+  border-radius: 8px;
+  white-space: pre-wrap;
+  color: var(--text-normal);
+}
