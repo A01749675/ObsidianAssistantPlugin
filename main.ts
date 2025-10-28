@@ -129,11 +129,40 @@ export default class AiAssistant extends Plugin {
 		const fileName = "AI Suggestions.md"; // Name of your note
 		const folderPath = ""; // Optional: put "NoteAI" if you want a subfolder
 		const fullPath = folderPath ? `${folderPath}/${fileName}` : fileName;
-		const currentDate: Date = new Date("2025-07-04T10:00:00");;
-		const template = [
-		`> [!note] [${prompt}]-${currentDate}`,
-		`> ${content}`
-		].join("\n");
+		const date = new Date().toLocaleString("en-US", {
+		year: "numeric",
+		month: "short",
+		day: "numeric",
+		hour: "2-digit",
+		minute: "2-digit",
+		});
+		const formatCallout = (
+		type: string,
+		prompt: string,
+		content: string,
+		date: string
+		): string => {
+		// Prefix every line of the content so it stays inside the callout
+		const formattedContent = content
+			.split("\n")
+			.map(line => `> ${line}`)
+			.join("\n");
+
+		// Return a full Markdown block
+		return `> [!${type}] [${prompt}] — ${date}\n${formattedContent}`;
+	}
+		const template = formatCallout(
+		"note",
+		prompt,
+		content,
+		date
+		);
+
+		// const template = [
+		// `> [!note] [${prompt}]-${formattedDate}`,
+		// `> ${content}`
+		// ].join("\n");
+
 		let file = vault.getAbstractFileByPath(fullPath);
 
 		if (file instanceof TFile) {
